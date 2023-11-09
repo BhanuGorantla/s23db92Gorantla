@@ -26,7 +26,7 @@ console.log("Connection to DB succeeded")});
 
 async function recreateDB(){
  // Delete everything
- await Bike.deleteMany({}).maxTimeMS(30000);
+ await bike.deleteMany({}).maxTimeMS(30000);
  let instance1 = new bike({ name: 'royal', color: 'Red', price: 19999.99 });
  let instance2 = new bike({ name: 'nina', color: 'green', price: 9990.99 });
  let instance3 = new bike({ name: 'gixer', color: 'Orange', price: 1999.49 });
