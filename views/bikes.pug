@@ -4,7 +4,7 @@ block content
   h1= title
   .container-fluid
     .row
-      - let results = [{ name: 'royal', color: 'Red', price: 19999.99 },{ name: 'nina', color: 'green', price: 9990.99 },{ name: 'gixer', color: 'Orange', price: 1999.49 }]
+      - let results1 = [{ name: 'royal', color: 'Red', price: 19999.99 },{ name: 'nina', color: 'green', price: 9990.99 },{ name: 'gixer', color: 'Orange', price: 1999.49 }]
       each bikes,index in results
         div(class="col-sm-2" onclick =`buy(${index})`)
           h4= bikes.name
