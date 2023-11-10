@@ -24,20 +24,20 @@ console.log("Connection to DB succeeded")});
 // We can seed the collection if needed on
 //server start
 
-async function recreateDB(){
- // Delete everything
- await bike.deleteMany({}).maxTimeMS(30000);
- let instance1 = new bike({ name: 'royal', color: 'Red', price: 19999.99 });
- let instance2 = new bike({ name: 'nina', color: 'green', price: 9990.99 });
- let instance3 = new bike({ name: 'gixer', color: 'Orange', price: 1999.49 });
- instance1.save().then(doc=>{console.log("First object saved")})
- instance2.save().then(doc=>{console.log("Second object saved")})
- instance3.save().then(doc=>{console.log("Third object saved")})
- .catch(err=>{
- console.error(err)});
-}
-let reseed = true;
-if (reseed) {recreateDB();}
+// async function recreateDB(){
+//  // Delete everything
+//  await bike.deleteMany({}).maxTimeMS(30000);
+//  let instance1 = new bike({ name: 'royal', color: 'Red', price: 19999.99 });
+//  let instance2 = new bike({ name: 'nina', color: 'green', price: 9990.99 });
+//  let instance3 = new bike({ name: 'gixer', color: 'Orange', price: 1999.49 });
+//  instance1.save().then(doc=>{console.log("First object saved")})
+//  instance2.save().then(doc=>{console.log("Second object saved")})
+//  instance3.save().then(doc=>{console.log("Third object saved")})
+//  .catch(err=>{
+//  console.error(err)});
+// }
+// let reseed = true;
+// if (reseed) {recreateDB();}
 
 
 
