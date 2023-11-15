@@ -91,3 +91,58 @@ exports.bike_delete = async function(req, res) {
     res.send(`{"error": Error deleting ${err}}`);
     }
    };
+
+   // Handle a show one view with id specified by query
+exports.bike_view_one_Page = async function(req, res) {
+    console.log("single view for id " + req.query.id)
+    try{
+    result = await bike.findById( req.query.id)
+    res.render('bikedetail',
+   { title: 'bike Detail', toShow: result });
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+   };
+
+   // Handle building the view for creating a costume.
+// No body, no in path parameter, no query.
+// Does not need to be async
+exports.bike_create_Page = function(req, res) {
+    console.log("create view")
+    try{
+    res.render('bikecreate', { title: 'bike Create'});
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    } }
+
+    // Handle building the view for updating a costume.
+// query provides the id
+exports.bike_update_Page = async function(req, res) {
+    console.log("update view for item "+req.query.id)
+    try{
+    let result = await bike.findById(req.query.id)
+    res.render('bikeupdate', { title: 'bike Update', toShow: result });
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+   };
+
+   // Handle a delete one view with id from query
+exports.bike_delete_Page = async function(req, res) {
+    console.log("Delete view for id " + req.query.id)
+    try{
+    result = await bike.findById(req.query.id)
+    res.render('bikedelete', { title: 'bike Delete', toShow:
+   result });
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+   };

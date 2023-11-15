@@ -2,17 +2,22 @@ extends layout
 
 block content
   h1= title
+  link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css')
+
   .container-fluid
     .row
-      - let results1 = [{ name: 'royal', color: 'Red', price: 19999.99 },{ name: 'nina', color: 'green', price: 9990.99 },{ name: 'gixer', color: 'Orange', price: 1999.49 }]
-      each bikes,index in results
-        div(class="col-sm-2" onclick =`buy(${index})`)
-          h4= bikes.name
-          p Color: #{bikes.color}
-          p Price: $#{bikes.price.toFixed(2)}
+      - let results1 
+      each bikes, index in results
+        .col-sm-4.mb-4
+          .card(style='width: 18rem; background-color:red', onclick=`buy(${index})`)
+            
+            .card-body
+              h5.card-title= bikes.name
+              p.card-text Color: #{bikes.color}
+              p.card-text Price: $#{bikes.price.toFixed(2)}
     a(href="/") Back to Index
+
   script.
-    function buy(i)
-    {
-      alert(`You purchased Item ${i+1}`)
+    function buy(i) {
+      alert(`You purchased Item ${i+1}`);
     }

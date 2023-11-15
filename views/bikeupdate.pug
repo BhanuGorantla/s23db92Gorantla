@@ -1,0 +1,46 @@
+extends layout
+
+block content
+  h1= title
+  if (toShow == null)
+    h2 No instance to delete
+  else
+    - let costumeid = toShow._id
+    - let costume_type = toShow.name
+    - let costumesize = toShow.color
+    - let costumecost = toShow.price
+
+    div.row(class='mb-2')
+      div.mr-1 ID is
+      div #{costumeid}
+
+    - let actionid = "/resource/bike/" + costumeid
+    form(id='CostumeForm', action= actionid, method="PUT")
+      div.form-group
+        label.costumeAttr(for='name') bike name
+        input#costume_type(type='text', name='bike_type', value= costume_type )
+      div.form-group
+        label.costumeAttr(for='color') bike color
+        input#size(type='text', name='color', value= costumesize )
+      div.form-group
+        label.costumeAttr(for='price') bike price
+        input#cost(type='number', name='price', value= costumecost )
+      input(type="submit")
+
+    script.
+      document.forms['CostumeForm'].addEventListener('submit', (event) => {
+        event.preventDefault();
+        // TODO do something here to show the user that the form is being submitted
+        fetch(event.target.action, {
+          method: 'PUT',
+          body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+        }).then((resp) => {
+          return resp.json(); // or resp.text() or whatever the server sends
+        }).then((body) => {
+          alert("Update succeeded")
+          // TODO handle body
+        }).catch((error) => {
+          // TODO handle error
+          alert("Update failed " + error )
+        });
+      });

@@ -1,0 +1,55 @@
+extends layout
+
+block content
+  h1= title
+  if (toShow == null)
+    h2 No instance to delete
+  else
+    - let costumeid = toShow._id
+    - let costume_type = toShow.name
+    - let costumecost = toShow.color
+    - let costumesize = toShow.price
+    - let actionid = "/resource/bike/" + costumeid
+
+    script.
+      let actionid = "#{actionid}"
+
+    div
+      div.row
+        div(class='costumeAttr mr-3') Bike ID is:
+          div #{costumeid}
+      div.row
+        div(class='costumeAttr mr-3') Bike name is:
+          div #{costume_type}
+      div.row
+        div(class='costumeAttr mr-3') Bike color is:
+          div #{costumesize}
+      div.row
+        div(class='costumeAttr mr-3') Bike price is:
+          div #{costumecost}
+      button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete
+      button(class="btn btn-secondary m-2" onclick="cancel()") Cancel
+
+    script.
+      function cancel() {
+        // Go back to the home page for the costume collection
+        window.location.href='/bikes'
+      }
+
+    script.
+      function deleteOnid() {
+        console.log("starting delete")
+        // delete first
+        fetch(actionid, {
+          method: 'DELETE' // Don't need a body for the delete
+        }).then((resp) => {
+          return resp.json(); // or resp.text() or whatever the server sends
+        }).then((body) => {
+          alert("Delete succeeded")
+          window.location.href='/bikes'
+          // TODO handle body
+        }).catch((error) => {
+          // TODO handle error
+          alert("Delete failed " + error )
+        });
+      }
