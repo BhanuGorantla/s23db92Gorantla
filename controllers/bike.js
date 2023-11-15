@@ -78,3 +78,16 @@ exports.bike_list = async function(req, res) {
     res.send(`{"error": ${err}}`);
     }
    };
+
+   // Handle Costume delete on DELETE.
+exports.bike_delete = async function(req, res) {
+    console.log("delete " + req.params.id)
+    try {
+    result = await bike.findByIdAndDelete( req.params.id)
+    console.log("Removed " + result)
+    res.send(result)
+    } catch (err) {
+    res.status(500)
+    res.send(`{"error": Error deleting ${err}}`);
+    }
+   };
