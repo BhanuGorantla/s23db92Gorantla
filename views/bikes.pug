@@ -6,7 +6,8 @@ block content
 
   .container-fluid
     .row
-      - let results1 
+      .col-sm-12.mb-3 To create new Fruit : 
+        button.btn.btn-success.btn-sm(create-btn, onclick='createbike()') Create
       each bikes, index in results
         .col-sm-4.mb-4
           .card(style='width: 18rem; background-color:red', onclick=`buy(${index})`)
@@ -15,9 +16,28 @@ block content
               h5.card-title= bikes.name
               p.card-text Color: #{bikes.color}
               p.card-text Price: $#{bikes.price.toFixed(2)}
-    a(href="/") Back to Index
+              button.btn.btn-danger.btn-sm(delete-btn, onclick=`updatebike('${bikes._id}')`) Update
+              button.btn.btn-danger.btn-sm(delete-btn, onclick=`detailbike('${bikes._id}')`) Detail
+              button.btn.btn-danger.btn-sm(delete-btn, onclick=`deletebike('${bikes._id}')`) Delete 
+
+  script.
+    function createbike() {
+      window.location.href = '/bikes/create';
+    }
 
   script.
     function buy(i) {
-      alert(`You purchased Item ${i+1}`);
+     // alert(`You purchased Item ${i+1}`);
+    }
+
+    function updatebike(id) {
+      window.location.href='/bikes/update/?id='+id;
+    }
+
+    function deletebike(id) {
+      window.location.href='/bikes/delete/?id='+id;
+    }
+
+    function detailbike(id) {
+      window.location.href='/bikes/detail/?id='+id;
     }
